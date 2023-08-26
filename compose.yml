@@ -1,0 +1,31 @@
+services:
+  db:
+    build: 
+      context: ./db
+      dockerfile: Dockerfile
+    volumes:
+      - ./db/sql:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_DATABASE=test
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 3306:3306
+  rep_p:
+    build: 
+      context: ./rep_primary
+      dockerfile: Dockerfile
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 13306:3306
+  rep_s:
+    build: 
+      context: ./rep_secondary
+      dockerfile: Dockerfile
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 23306:3306
