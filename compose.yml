@@ -36,10 +36,10 @@ services:
       - 23306:3306
   db-tuner:
     build: 
-      context: ./db
+      context: ./db-tuner
       dockerfile: Dockerfile
     links:
-      - db    
+      - db
 volumes:
   db-store:
   rep_p:
