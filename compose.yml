@@ -34,6 +34,12 @@ services:
       - rep_s:/var/lib/mysql
     ports:
       - 23306:3306
+  db-tuner:
+    build: 
+      context: ./db
+      dockerfile: Dockerfile
+    links:
+      - db    
 volumes:
   db-store:
   rep_p:
